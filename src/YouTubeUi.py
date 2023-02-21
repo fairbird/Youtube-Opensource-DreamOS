@@ -448,7 +448,7 @@ class YouTubeMain(Screen):
 			GET = requests.get(repo_url).text
 			regx = 'data-url="/fairbird/Youtube-Opensource-DreamOS/commits/(.*?)/commits_list_item"'
 			checkhash = re.findall(regx,GET)[0]
-			if readhash == checkhash:
+			if readhash != checkhash:
 				self.session.openWithCallback(self.install, MessageBox, _('New version is available.\nDo want to install now.'), MessageBox.TYPE_YESNO)
 		except Exception as e:
 			print('[YouTube] readhash', e)
