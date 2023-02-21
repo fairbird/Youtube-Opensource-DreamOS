@@ -2,11 +2,12 @@
 -------
 [![](https://user-images.githubusercontent.com/1623947/79113396-8004a100-7d89-11ea-9ff5-17ea7ce607a6.jpg)](https://www.youtube.com/)
 =========
+To install plugin directly online from telnet be this command ... لتثبيت البلجن مباشرة من خلال الإنترنيت بواسطة التلنت بهذا الأمر
+```
+wget https://raw.githubusercontent.com/fairbird/Youtube-Opensource-DreamOS/master/installer.sh -qO - | /bin/sh
+```
+=========
 Enigma2 plugin to manage your youtube account and watch videos
-
-Depends
--------
-python-codecs, python-json, python-netclient
 
 Privacy policy
 -------
@@ -15,13 +16,3 @@ Privacy policy
 Screenshots
 -------
 ![](https://user-images.githubusercontent.com/1623947/79112992-8f371f00-7d88-11ea-8858-480c5fe94faa.jpg)
-
-![](https://user-images.githubusercontent.com/1623947/79112997-91997900-7d88-11ea-903e-1502e1dbbd9c.jpg)
-
-![](https://user-images.githubusercontent.com/1623947/79113003-978f5a00-7d88-11ea-8b18-60b04ec0e3c7.jpg)
-
-![](https://user-images.githubusercontent.com/1623947/79113010-99f1b400-7d88-11ea-985f-c9a45628b4b6.jpg)
-
-![](https://user-images.githubusercontent.com/1623947/79113014-9c540e00-7d88-11ea-9281-e5788dac44ba.jpg)
-
-
