@@ -8,10 +8,6 @@ Depends
 -------
 python-codecs, python-json, python-netclient
 
-Download
--------
-[enigma2-plugin-youtube](https://github.com/Taapat/enigma2-plugin-youtube/releases)
-
 Privacy policy
 -------
 [Plugin privacy policy URL](http://taapat.ho.ua/license.html)
