@@ -103,7 +103,7 @@ cd ..
 repo_url="https://github.com/fairbird/Youtube-Opensource-DreamOS/commits/master/src"
 hashfile="/usr/lib/enigma2/python/Plugins/Extensions/YouTube/.hashfile"
 [ ! $hashfile ] && touch $hashfile
-wget -q -O- $repo_url | sed -ne 's#.*data-url="/fairbird/Youtube-Opensource-DreamOS/commits/\([^$<]*\)/commits_list_item".*#\1#p' | cut -d "=" -f2 | awk '{$1=$1};1' | head -1 > $hashfile
+wget -q -O- $repo_url | sed -ne 's#.*data-url="/fairbird/Youtube-Opensource-DreamOS/commits/\([^$<]*\)/commits_list_item".*#\1#p' | cut -d "=" -f2 | head -1 > $hashfile
 #########################
 
 sleep 1
