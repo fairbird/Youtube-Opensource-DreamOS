@@ -443,7 +443,7 @@ class YouTubeMain(Screen):
 		try:
 			## Read curent hash commit
 			readhash = open(hashfile)
-			readhash = readhash.read()
+			readhash = readhash.read().strip()
 			## Read url hash commit
 			GET = requests.get(repo_url).text
 			regx = 'data-url="/fairbird/Youtube-Opensource-DreamOS/commits/(.*?)/commits_list_item"'
