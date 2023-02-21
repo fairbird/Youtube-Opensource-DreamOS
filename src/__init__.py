@@ -33,13 +33,7 @@ locale_init()
 language.addCallback(locale_init)
 
 
-try:
-	# Check functions for full svg and scaling support
-	from enigma import loadSVG
-	from skin import applySkinFactor
-	screenwidth = 'svg'
-except ImportError:
-	from enigma import getDesktop
-	screenwidth = getDesktop(0).size().width()
-	if not screenwidth:
-		screenwidth = 720
+from enigma import getDesktop
+screenwidth = getDesktop(0).size().width()
+if not screenwidth:
+	screenwidth = 720
