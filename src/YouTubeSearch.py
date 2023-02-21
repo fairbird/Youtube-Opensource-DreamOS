@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import os
 from os import path as os_path
 
 from threading import Thread
@@ -17,6 +18,7 @@ from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 from . import _, screenwidth
 from .compat import compat_quote
@@ -354,8 +356,20 @@ class YouTubeSearch(Screen, ConfigListScreen):
 
 	def openKeyboard(self):
 		self['config'].getCurrent()[1].help_window.instance.hide()
-		self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
-				text=self.searchValue.value)
+		self.VirtualKeyBoard = config.plugins.YouTube.VirtualKeyBoard.value
+		if self.VirtualKeyBoard == "YouTube":
+			if os.path.islink("/usr/lib/enigma2/python/Screens/VirtualKeyBoard.py") and os.path.exists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NewVirtualKeyBoard")):
+				from Screens.VirtualKeyBoard import VirtualKeyBoard
+				self.session.openWithCallback(self.keyBoardCallback, VirtualKeyBoard, '')
+			else:
+				self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
+					text = self.searchValue.value)
+		elif self.VirtualKeyBoard == "Image":
+			from Screens.VirtualKeyBoard import VirtualKeyBoard
+			self.session.openWithCallback(self.keyBoardCallback, VirtualKeyBoard, '')
+		else:
+			self.session.openWithCallback(self.keyBoardCallback, YouTubeVirtualKeyBoard,
+				text = self.searchValue.value)
 
 	def keyBoardCallback(self, name):
 		config = self['config'].getCurrent()[1]

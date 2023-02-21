@@ -83,6 +83,8 @@ config.plugins.YouTube.onMovieEof = ConfigSelection(default='related', choices=[
 config.plugins.YouTube.onMovieStop = ConfigSelection(default='related', choices=[
 	('related', _('Show related videos')),
 	('ask', _('Ask user')), ('quit', _('Return to list'))])
+config.plugins.YouTube.VirtualKeyBoard = ConfigSelection(default='YouTube', choices=[
+	('YouTube', _('YouTube VirtualKeyBoard')), ('Image', _('Image VirtualKeyBoard'))])
 config.plugins.YouTube.login = ConfigYesNo(default=False)
 config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
 config.plugins.YouTube.useDashMP4 = ConfigYesNo(default=True)
@@ -1535,6 +1537,9 @@ class YouTubeSetup(ConfigListScreen, Screen):
 			self.list.append((_('Merge downloaded files:'),
 				config.plugins.YouTube.mergeFiles,
 				_('FFmpeg will be used to merge downloaded DASH video and audio files.\nFFmpeg will be installed if necessary.')))
+		self.list.append((_('Choose VirtualKeyBoard Style:'),
+			config.plugins.YouTube.VirtualKeyBoard,
+			_('You can choose what style of VirtualKeyBoard to use it.\nYouTube OR Image (VirtualKeyBoard).')))
 		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_MENU):
 			if 'ServiceApp' in p.path:
 				self.list.append((_('Media player:'),
