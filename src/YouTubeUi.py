@@ -46,6 +46,7 @@ except ImportError:
 
 
 config.plugins.YouTube = ConfigSubsection()
+config.plugins.YouTube.update = ConfigYesNo(default=True)
 config.plugins.YouTube.saveHistory = ConfigYesNo(default=True)
 config.plugins.YouTube.searchResult = ConfigSelection(default='24',
 	choices=[('4', '4'),
@@ -389,6 +390,13 @@ class YouTubeMain(Screen):
 		self.use_picload = True
 		self.ytapi = None
 		self.yts = [{}]
+		if config.plugins.YouTube.update.value:
+			self.timer = eTimer()
+			try:
+				self.timer.callback.append(self.checkupdates)
+			except Exception as e:
+				self.timer_conn = self.timer.timeout.connect(self.checkupdates)
+			self.timer.start(1, True)
 		self.onLayoutFinish.append(self.layoutFinish)
 		self.onClose.append(self.cleanVariables)
 		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_MENU):
@@ -427,6 +435,37 @@ class YouTubeMain(Screen):
 		self.createAuth()
 		self.createMainList()
 		self.active_downloads = len(job_manager.getPendingJobs())
+
+	def checkupdates(self):
+		import requests, re
+		repo_url = "https://github.com/fairbird/Youtube-Opensource-DreamOS/commits/master/src"
+		hashfile = "/usr/lib/enigma2/python/Plugins/Extensions/YouTube/.hashfile"
+		try:
+			## Read curent hash commit
+			readhash = open(hashfile)
+			readhash = readhash.read()
+			## Read url hash commit
+			GET = requests.get(repo_url).text
+			regx = 'data-url="/fairbird/Youtube-Opensource-DreamOS/commits/(.*?)/commits_list_item"'
+			checkhash = re.findall(regx,GET)[0]
+			if readhash != checkhash:
+				self.session.openWithCallback(self.install, MessageBox, _('New version is available.\nDo want to install now.'), MessageBox.TYPE_YESNO)
+		except Exception as e:
+			print('[YouTube] readhash', e)
+
+	def install(self, answer = False):
+		try:
+			if answer:
+				from Screens.Console import Console
+				cmdlist = []
+				cmd='wget https://raw.githubusercontent.com/fairbird/Youtube-Opensource-DreamOS/master/installer.sh -O - | /bin/sh'
+				cmdlist.append(cmd)
+				self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist = cmdlist, finishedCallback = self.myCallback, closeOnSuccess = False)
+		except Exception as e:
+			print('[YouTube] install update', e)
+        
+	def myCallback(self,result):
+		return
 
 	def cleanVariables(self):
 		del self.splitTaimer
@@ -1464,6 +1503,8 @@ class YouTubeSetup(ConfigListScreen, Screen):
 			return
 		self.list = [(_('Login on startup:'), config.plugins.YouTube.login,
 				_('Log in to your YouTube account when plugin starts.\nThis needs to approve in the Google home page!')),
+			(_('update online:'), config.plugins.YouTube.update,
+				_('Enable or Disable Update plugin from Online.')),
 			(_('Save search result:'), config.plugins.YouTube.saveHistory,
 				_('Save your search result in the history, when search completed.')),
 			(_('Search results:'), config.plugins.YouTube.searchResult,
