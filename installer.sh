@@ -80,6 +80,13 @@ install $Packagepyopenssl
 install $Packagetwistedweb
 
 #########################
+# Remove old version
+if [ $OSTYPE = "Opensource" ]; then
+    opkg remove enigma2-plugin-extensions-youtube
+else
+    apt remove enigma2-plugin-extensions-youtube -y
+fi
+#########################
 cd $TMPDIR
 set -e
 echo "Downloading And Insallling YouTube plugin Please Wait ......"
