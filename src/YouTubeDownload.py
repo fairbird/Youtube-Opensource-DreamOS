@@ -191,7 +191,10 @@ class YouTubeDownloadList(Screen):
 		self.onLayoutFinish.append(self.updateDownloadList)
 		self.onClose.append(self.cleanVariables)
 		self.progressTimer = eTimer()
-		self.progressTimer.callback.append(self.updateDownloadList)
+		try:
+			self.progressTimer.callback.append(self.updatedownload_list)
+		except:
+			self.progressTimer_conn = self.progressTimer.timeout.connect(self.updatedownload_list)
 
 	def cleanVariables(self):
 		del self.progressTimer
