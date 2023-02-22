@@ -31,6 +31,10 @@ DEFAULT_BUTTONS = 'skin_default/buttons'
 if os_path.exists('/usr/share/enigma2/skin_default/vkey_icon.png'):
 	DEFAULT_BUTTONS = 'skin_default'
 
+def DreamOS():
+	if os.path.exists('/var/lib/dpkg/status'):
+		return DreamOS
+
 
 class YouTubeVirtualKeyBoard(VirtualKeyBoard):
 	def __init__(self, session, text):
@@ -158,39 +162,70 @@ class YouTubeSearch(Screen, ConfigListScreen):
 					pixmap="%s/vkey_icon.png" transparent="1" alphatest="on" />
 			</screen>""" % (DEFAULT_BUTTONS)
 	elif screenwidth == 1920:
-		skin = """<screen position="center,225" size="945,555">
-				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/YouTube/YouTube_FHD.png" \
-					position="22,15" size="150,60" transparent="1" alphatest="on" />
-				<widget name="config" position="182,22" size="740,45" zPosition="2" \
-					scrollbarMode="showNever" itemHeight="45" font="Regular;30" />
-				<widget source="list" render="Listbox" position="22,75" size="900,409" \
-					scrollbarMode="showOnDemand" >
-					<convert type="TemplatedMultiContent" >
-						{"template": [MultiContentEntryText(pos=(15,1), size=(870,45), \
-							font=0, flags=RT_HALIGN_LEFT, text=0)],
-						"fonts": [gFont("Regular",30)],
-						"itemHeight": 45}
-					</convert>
-				</widget>
-				<ePixmap position="43,507" size="53,38" pixmap="%s/buttons/key_text.png" \
-					transparent="1" alphatest="on" />
-				<ePixmap position="127,484" size="210,60" pixmap="%s/buttons/red.png" \
-					transparent="1" alphatest="on" />
-				<ePixmap position="367,484" size="210,60" pixmap="%s/buttons/green.png" \
-					transparent="1" alphatest="on" />
-				<ePixmap position="608,484" size="210,60" pixmap="%s/buttons/yellow.png" \
-					transparent="1" alphatest="on" />
-				<widget source="key_red" render="Label" position="127,485" zPosition="2" size="210,60" \
-					valign="center" halign="center" font="Regular;33" transparent="1" />
-				<widget source="key_green" render="Label" position="367,485" zPosition="2" size="210,60" \
-					valign="center" halign="center" font="Regular;33" transparent="1" />
-				<widget source="key_yellow" render="Label" position="608,485" zPosition="2" size="210,60" \
-					valign="center" halign="center" font="Regular;33" transparent="1" />
-				<ePixmap position="849,507" size="53,38" pixmap="%s/buttons/key_menu.png" \
-					transparent="1" alphatest="on" />
-				<widget name="HelpWindow" position="600,810" size="1,1" zPosition="5" \
-					pixmap="%s/vkey_icon.png" transparent="1" alphatest="on" />
-			</screen>""" % (BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, DEFAULT_BUTTONS)
+		if not DreamOS():
+				skin = """<screen position="center,225" size="945,555">
+						<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/YouTube/YouTube_FHD.png" \
+							position="22,15" size="150,60" transparent="1" alphatest="on" />
+						<widget name="config" position="182,22" size="740,45" zPosition="2" \
+							scrollbarMode="showNever" itemHeight="45" font="Regular;30" />
+						<widget source="list" render="Listbox" position="22,75" size="900,409" \
+							scrollbarMode="showOnDemand" >
+							<convert type="TemplatedMultiContent" >
+								{"template": [MultiContentEntryText(pos=(15,1), size=(870,45), \
+									font=0, flags=RT_HALIGN_LEFT, text=0)],
+								"fonts": [gFont("Regular",30)],
+								"itemHeight": 45}
+							</convert>
+						</widget>
+						<ePixmap position="43,507" size="53,38" pixmap="%s/buttons/key_text.png" \
+							transparent="1" alphatest="on" />
+						<ePixmap position="127,484" size="210,60" pixmap="%s/buttons/red.png" \
+							transparent="1" alphatest="on" />
+						<ePixmap position="367,484" size="210,60" pixmap="%s/buttons/green.png" \
+							transparent="1" alphatest="on" />
+						<ePixmap position="608,484" size="210,60" pixmap="%s/buttons/yellow.png" \
+							transparent="1" alphatest="on" />
+						<widget source="key_red" render="Label" position="127,485" zPosition="2" size="210,60" \
+							valign="center" halign="center" font="Regular;33" transparent="1" />
+						<widget source="key_green" render="Label" position="367,485" zPosition="2" size="210,60" \
+							valign="center" halign="center" font="Regular;33" transparent="1" />
+						<widget source="key_yellow" render="Label" position="608,485" zPosition="2" size="210,60" \
+							valign="center" halign="center" font="Regular;33" transparent="1" />
+						<ePixmap position="849,507" size="53,38" pixmap="%s/buttons/key_menu.png" \
+							transparent="1" alphatest="on" />
+						<widget name="HelpWindow" position="600,810" size="1,1" zPosition="5" \
+							pixmap="%s/vkey_icon.png" transparent="1" alphatest="on" />
+					</screen>""" % (BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDERER, DEFAULT_BUTTONS)
+		else:
+				skin = """<screen position="center,225" size="945,555">
+						<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/YouTube/YouTube_FHD.png" \
+							position="22,15" size="150,60" transparent="1" alphatest="on" />
+						<widget name="config" position="182,22" size="740,45" zPosition="2" \
+							scrollbarMode="showNever" itemHeight="45" />
+						<widget source="list" render="Listbox" position="22,75" size="900,409" \
+							scrollbarMode="showOnDemand" >
+							<convert type="TemplatedMultiContent" >
+								{"template": [MultiContentEntryText(pos=(15,1), size=(870,45), \
+									font=0, flags=RT_HALIGN_LEFT, text=0)],
+								"fonts": [gFont("Regular",30)],
+								"itemHeight": 45}
+							</convert>
+						</widget>
+						<ePixmap position="127,484" size="210,60" pixmap="%s/buttons/red.png" \
+							transparent="1" alphatest="on" />
+						<ePixmap position="367,484" size="210,60" pixmap="%s/buttons/green.png" \
+							transparent="1" alphatest="on" />
+						<ePixmap position="608,484" size="210,60" pixmap="%s/buttons/yellow.png" \
+							transparent="1" alphatest="on" />
+						<widget source="key_red" render="Label" position="127,485" zPosition="2" size="210,60" \
+							valign="center" halign="center" font="Regular;33" transparent="1" />
+						<widget source="key_green" render="Label" position="367,485" zPosition="2" size="210,60" \
+							valign="center" halign="center" font="Regular;33" transparent="1" />
+						<widget source="key_yellow" render="Label" position="608,485" zPosition="2" size="210,60" \
+							valign="center" halign="center" font="Regular;33" transparent="1" />
+						<widget name="HelpWindow" position="600,810" size="1,1" zPosition="5" \
+							pixmap="skin_default/vkey_icon.png" transparent="1" alphatest="on" />
+					</screen>""" % (BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER)
 	else:
 		skin = """<screen position="center,150" size="630,370">
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/YouTube/YouTube_HD.png" \
