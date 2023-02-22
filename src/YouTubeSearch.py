@@ -32,7 +32,7 @@ if os_path.exists('/usr/share/enigma2/skin_default/vkey_icon.png'):
 	DEFAULT_BUTTONS = 'skin_default'
 
 def DreamOS():
-	if os_path('/var/lib/dpkg/status'):
+	if os.path.exists('/var/lib/dpkg/status'):
 		return DreamOS
 
 
