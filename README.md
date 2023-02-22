@@ -6,9 +6,6 @@ To install plugin directly online from telnet be this command ... لتثبيت �
 ```
 wget https://raw.githubusercontent.com/fairbird/Youtube-Opensource-DreamOS/master/installer.sh -qO - | /bin/sh
 ```
-=========
-Enigma2 plugin to manage your youtube account and watch videos
-
 Privacy policy
 -------
 [Plugin privacy policy URL](http://taapat.ho.ua/license.html)
