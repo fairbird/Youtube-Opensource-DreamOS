@@ -54,6 +54,7 @@ install() {
 if python --version 2>&1 | grep -q '^Python 3\.'; then
     echo ":You have Python3 image ..."
     sleep 1
+    Packagegettext=gettext
     Packagescodecs=python3-codecs
     Packagecore=python3-core
     Packagejson=python3-json
@@ -63,6 +64,7 @@ if python --version 2>&1 | grep -q '^Python 3\.'; then
 else
     echo ":You have Python2 image ..."
     sleep 1
+    Packagegettext=gettext
     Packagescodecs=python-codecs
     Packagecore=python-core
     Packagejson=python-json
@@ -72,6 +74,7 @@ else
 fi
 
 # check depends packges if installed
+install $Packagegettext
 install $Packagescodecs
 install $Packagecore
 install $Packagejson
@@ -94,6 +97,9 @@ echo
 wget https://github.com/fairbird/Youtube-Opensource-DreamOS/archive/refs/heads/master.tar.gz -qP $TMPDIR
 tar -xzf master.tar.gz
 mkdir -p $PLUGINDIR/YouTube
+cd Youtube-Opensource-DreamOS-master
+python compilelang.py > /dev/null 2>&1
+cd ..
 cp -rf Youtube-Opensource-DreamOS-master/src/* $PLUGINDIR/YouTube
 rm -rf *master*
 set +e
