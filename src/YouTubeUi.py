@@ -130,6 +130,14 @@ class YouTubePlayer(MoviePlayer):
 				iPlayableService.evVideoSizeChanged: self.__serviceStart})  # On exteplayer evStart not working
 		self.servicelist = InfoBar.instance and InfoBar.instance.servicelist
 		self.started = False
+		self['actions'] = ActionMap(['ColorActions',
+			'SetupActions', 'DirectionActions', 'MovieSelectionActions', 'MediaPlayerActions'],
+			{
+				'red': self.leavePlayer,
+				'cancel': self.leavePlayer,
+				'stop': self.leavePlayer,
+				'showEventInfo': self.openCurEventView,
+			}, -1)
 		self.lastPosition = []
 
 	def __serviceStart(self):
@@ -383,7 +391,10 @@ class YouTubeMain(Screen):
 		self['thumbnail'] = Pixmap()
 		self['thumbnail'].hide()
 		self.splitTaimer = eTimer()
-		self.splitTaimer.timeout.callback.append(self.splitTaimerStop)
+		try:
+			self.splitTaimer.timeout.callback.append(self.splitTaimerStop)
+		except:
+			self.splitTaimer_conn = self.splitTaimer.timeout.connect(self.splitTaimerStop)
 		self.active_downloads = 0
 		self.is_auth = False
 		self.search_result = config.plugins.YouTube.searchResult.value
@@ -619,8 +630,10 @@ class YouTubeMain(Screen):
 		elif self.use_picload:
 			from enigma import ePicLoad
 			self.picloads[entry_id] = ePicLoad()
-			self.picloads[entry_id].PictureData.get()\
-					.append(boundFunction(self.finishDecode, entry_id, image))
+			try:
+				self.picloads[entry_id].PictureData.get().append(boundFunction(self.finishDecode, entry_id, image))
+			except:
+				self.picloads[entry_id].conn = self.picloads[entry_id].PictureData.connect(boundFunction(self.finishDecode, entry_id, image))
 			self.picloads[entry_id].setPara((
 				self.thumb_size[0], self.thumb_size[1],
 				self.sc[0], self.sc[1], False, 1, '#00000000'))
@@ -643,7 +656,10 @@ class YouTubeMain(Screen):
 			else:
 				self.updateThumbnails(entry_id)
 			self.delPicloadTimer = eTimer()
-			self.delPicloadTimer.callback.append(boundFunction(self.delPicload, entry_id))
+			try:
+				self.delPicloadTimer.callback.append(boundFunction(self.delPicload, entry_id))
+			except:
+				self.delPicloadTimer_conn = self.delPicloadTimer.timeout.connect(boundFunction(self.delPicload, entry_id))
 			self.delPicloadTimer.start(1, True)
 
 	def delPicload(self, entry_id):
@@ -722,7 +738,10 @@ class YouTubeMain(Screen):
 				elif action == 'playprev':
 					self.selectPrevious()
 				self.playTaimer = eTimer()
-				self.playTaimer.timeout.callback.append(self.playTaimerStop)
+				try:
+					self.playTaimer.timeout.callback.append(self.playTaimerStop)
+				except:
+					self.playTaimer_conn = self.playTaimer.timeout.connect(self.playTaimerStop)
 				self.playTaimer.start(1, True)
 
 	def playTaimerStop(self):
@@ -1600,7 +1619,10 @@ class YouTubeSetup(ConfigListScreen, Screen):
 		else:
 			from .OAuth import OAuth
 			self.splitTaimer = eTimer()
-			self.splitTaimer.timeout.callback.append(self.splitTaimerStop)
+			try:
+				self.splitTaimer.timeout.callback.append(self.splitTaimerStop)
+			except:
+				self.splitTaimer_conn = self.splitTaimer.timeout.connect(self.splitTaimerStop)
 			self.oauth = OAuth()
 			url, user_code = self.oauth.get_user_code()
 			if user_code:
