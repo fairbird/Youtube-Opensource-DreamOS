@@ -195,7 +195,7 @@ class YouTubeSearch(Screen, ConfigListScreen):
 							transparent="1" alphatest="on" />
 						<widget name="HelpWindow" position="600,810" size="1,1" zPosition="5" \
 							pixmap="%s/vkey_icon.png" transparent="1" alphatest="on" />
-					</screen>""" % (BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDERER, DEFAULT_BUTTONS)
+					</screen>""" % (BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, DEFAULT_BUTTONS)
 		else:
 				skin = """<screen position="center,225" size="945,555">
 						<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/YouTube/YouTube_FHD.png" \
