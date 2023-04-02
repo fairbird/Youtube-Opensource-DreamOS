@@ -23,7 +23,6 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from . import _, screenwidth
 from .compat import compat_quote
 from .compat import compat_urlopen
-from .YouTubeUi import BUTTONS_FOLDER
 
 
 # Workaround to keep compatibility broken with changes in new images
@@ -160,7 +159,7 @@ class YouTubeSearch(Screen, ConfigListScreen):
 					transparent="1" alphatest="on" />
 				<widget name="HelpWindow" position="400,540" size="1,1" zPosition="5" \
 					pixmap="%s/vkey_icon.png" transparent="1" alphatest="on" />
-			</screen>""" % (DEFAULT_BUTTONS)
+			</screen>""" % DEFAULT_BUTTONS
 	elif screenwidth == 1920:
 		if not DreamOS():
 				skin = """<screen position="center,225" size="945,555">
@@ -177,13 +176,13 @@ class YouTubeSearch(Screen, ConfigListScreen):
 								"itemHeight": 45}
 							</convert>
 						</widget>
-						<ePixmap position="43,507" size="53,38" pixmap="%s/buttons/key_text.png" \
+						<ePixmap position="43,507" size="53,38" pixmap="skin_default/buttons/key_text.png" \
 							transparent="1" alphatest="on" />
-						<ePixmap position="127,484" size="210,60" pixmap="%s/buttons/red.png" \
+						<ePixmap position="127,484" size="210,60" pixmap="skin_default/buttons/red.png" \
 							transparent="1" alphatest="on" />
-						<ePixmap position="367,484" size="210,60" pixmap="%s/buttons/green.png" \
+						<ePixmap position="367,484" size="210,60" pixmap="skin_default/buttons/green.png" \
 							transparent="1" alphatest="on" />
-						<ePixmap position="608,484" size="210,60" pixmap="%s/buttons/yellow.png" \
+						<ePixmap position="608,484" size="210,60" pixmap="skin_default/buttons/yellow.png" \
 							transparent="1" alphatest="on" />
 						<widget source="key_red" render="Label" position="127,485" zPosition="2" size="210,60" \
 							valign="center" halign="center" font="Regular;33" transparent="1" />
@@ -191,11 +190,11 @@ class YouTubeSearch(Screen, ConfigListScreen):
 							valign="center" halign="center" font="Regular;33" transparent="1" />
 						<widget source="key_yellow" render="Label" position="608,485" zPosition="2" size="210,60" \
 							valign="center" halign="center" font="Regular;33" transparent="1" />
-						<ePixmap position="849,507" size="53,38" pixmap="%s/buttons/key_menu.png" \
+						<ePixmap position="849,507" size="53,38" pixmap="skin_default/buttons/key_menu.png" \
 							transparent="1" alphatest="on" />
 						<widget name="HelpWindow" position="600,810" size="1,1" zPosition="5" \
 							pixmap="%s/vkey_icon.png" transparent="1" alphatest="on" />
-					</screen>""" % (BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER, DEFAULT_BUTTONS)
+					</screen>""" % DEFAULT_BUTTONS
 		else:
 				skin = """<screen position="center,225" size="945,555">
 						<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/YouTube/YouTube_FHD.png" \
@@ -211,11 +210,11 @@ class YouTubeSearch(Screen, ConfigListScreen):
 								"itemHeight": 45}
 							</convert>
 						</widget>
-						<ePixmap position="127,484" size="210,60" pixmap="%s/buttons/red.png" \
+						<ePixmap position="127,484" size="210,60" pixmap="skin_default/buttons/red.png" \
 							transparent="1" alphatest="on" />
-						<ePixmap position="367,484" size="210,60" pixmap="%s/buttons/green.png" \
+						<ePixmap position="367,484" size="210,60" pixmap="skin_default/buttons/green.png" \
 							transparent="1" alphatest="on" />
-						<ePixmap position="608,484" size="210,60" pixmap="%s/buttons/yellow.png" \
+						<ePixmap position="608,484" size="210,60" pixmap="skin_default/buttons/yellow.png" \
 							transparent="1" alphatest="on" />
 						<widget source="key_red" render="Label" position="127,485" zPosition="2" size="210,60" \
 							valign="center" halign="center" font="Regular;33" transparent="1" />
@@ -225,7 +224,7 @@ class YouTubeSearch(Screen, ConfigListScreen):
 							valign="center" halign="center" font="Regular;33" transparent="1" />
 						<widget name="HelpWindow" position="600,810" size="1,1" zPosition="5" \
 							pixmap="skin_default/vkey_icon.png" transparent="1" alphatest="on" />
-					</screen>""" % (BUTTONS_FOLDER, BUTTONS_FOLDER, BUTTONS_FOLDER)
+					</screen>"""
 	else:
 		skin = """<screen position="center,150" size="630,370">
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/YouTube/YouTube_HD.png" \
