@@ -113,7 +113,6 @@ wget -q -O- $repo_url | sed -ne 's#.*data-url="/fairbird/Youtube-Opensource-Drea
 #########################
 
 sleep 1
-clear
 echo "#########################################################"
 echo "#           YouTube INSTALLED SUCCESSFULLY              #"
 echo "#                 Taapat  &  RAED                       #"
