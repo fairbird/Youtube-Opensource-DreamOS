@@ -41,17 +41,15 @@ install() {
         if [ $OSTYPE = "Opensource" ]; then
             $OPKGINSTAL "$1"
             sleep 1
-            clear
         elif [ $OSTYPE = "DreamOS" ]; then
             $OPKGINSTAL "$1" -y
             sleep 1
-            clear
         fi
     fi
 }
 
 #########################
-if python --version 2>&1 | grep -q '^Python 3\.'; then
+if [ -f /usr/bin/python3 ] ; then
     echo ":You have Python3 image ..."
     sleep 1
     Packagegettext=gettext
