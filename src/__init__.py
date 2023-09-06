@@ -11,8 +11,10 @@ def locale_init():
 		environ["LANGUAGE"]
 	except KeyError:  # On old images LANGUAGE environment is not set
 		environ["LANGUAGE"] = language.getLanguage()[:2]
-	gettext.bindtextdomain("YouTube", resolveFilename(SCOPE_PLUGINS,
-			"Extensions/YouTube/locale"))
+	gettext.bindtextdomain(
+		"YouTube",
+		resolveFilename(SCOPE_PLUGINS, "Extensions/YouTube/locale")
+	)
 
 
 def _(txt):
