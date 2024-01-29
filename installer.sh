@@ -104,10 +104,10 @@ set +e
 cd ..
 #########################
 # Add latest hash commit
-repo_url="https://github.com/fairbird/Youtube-Opensource-DreamOS/commits/master/src"
+repo_url="https://api.github.com/repos/fairbird/Youtube-Opensource-DreamOS/git/refs/heads/master"
 hashfile="/usr/lib/enigma2/python/Plugins/Extensions/YouTube/.hashfile"
 [ ! $hashfile ] && touch $hashfile
-wget -q -O- $repo_url | sed -ne 's#.*data-url="/fairbird/Youtube-Opensource-DreamOS/commits/\([^$<]*\)/commits_list_item".*#\1#p' | cut -d "=" -f2 | head -n 1 > $hashfile
+wget -q -O- $repo_url | awk -F "commits/" '{print $2}' | awk '{ print substr( $0, 1, length($0)-3 ) }' > $hashfile
 #########################
 
 sleep 1

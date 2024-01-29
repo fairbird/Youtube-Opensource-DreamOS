@@ -443,15 +443,18 @@ class YouTubeMain(Screen):
 
 	def checkupdates(self):
 		import requests, re
-		repo_url = "https://github.com/fairbird/Youtube-Opensource-DreamOS/commits/master/src"
+		repo_url = "https://api.github.com/repos/fairbird/Youtube-Opensource-DreamOS/git/refs/heads/master"
 		hashfile = "/usr/lib/enigma2/python/Plugins/Extensions/YouTube/.hashfile"
+		if not os.path.exists(hashfile):
+			file = open(hashfile, "w")
+			file.close()
 		try:
 			## Read curent hash commit
 			readhash = open(hashfile)
 			readhash = readhash.read().strip()
 			## Read url hash commit
 			GET = requests.get(repo_url).text
-			regx = 'data-url="/fairbird/Youtube-Opensource-DreamOS/commits/(.*?)/commits_list_item"'
+			regx = '"object":{"sha":"(.*?)"'
 			checkhash = re.findall(regx,GET)[0]
 			if readhash != checkhash:
 				self.session.openWithCallback(self.install, MessageBox, _('New version is available.\nDo want to install now.'), MessageBox.TYPE_YESNO)
