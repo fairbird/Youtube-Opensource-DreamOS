@@ -53,6 +53,7 @@ if [ -f /usr/bin/python3 ] ; then
     echo ":You have Python3 image ..."
     sleep 1
     Packagegettext=gettext
+    Packagesrequests=python3-requests
     Packagescodecs=python3-codecs
     Packagecore=python3-core
     Packagejson=python3-json
@@ -63,6 +64,7 @@ else
     echo ":You have Python2 image ..."
     sleep 1
     Packagegettext=gettext
+    Packagesrequests=python-requests
     Packagescodecs=python-codecs
     Packagecore=python-core
     Packagejson=python-json
@@ -72,6 +74,7 @@ else
 fi
 
 # check depends packges if installed
+install $Packagesrequests
 install $Packagegettext
 install $Packagescodecs
 install $Packagecore
