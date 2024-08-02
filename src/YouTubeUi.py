@@ -27,6 +27,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_HDD, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 
+from Screens.Console import Console
 from .compat import compat_urlretrieve
 from .compat import SUBURI
 
@@ -472,16 +473,12 @@ class YouTubeMain(Screen):
 	def install(self, answer = False):
 		try:
 			if answer:
-				from Screens.Console import Console
 				cmdlist = []
 				cmd='wget https://raw.githubusercontent.com/fairbird/Youtube-Opensource-DreamOS/master/installer.sh -O - | /bin/sh'
 				cmdlist.append(cmd)
-				self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist = cmdlist, finishedCallback = self.myCallback, closeOnSuccess = False)
+				self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist=cmdlist)
 		except Exception as e:
 			print('[YouTube] install update', e)
-        
-	def myCallback(self,result):
-		return
 
 	def cleanVariables(self):
 		del self.splitTaimer
@@ -1582,13 +1579,11 @@ class YouTubeSetup(ConfigListScreen, Screen):
 
 	def removeCallback(self, answer):
 		if answer:
-			from Screens.Console import Console
 			self.session.open(Console, cmdlist=['opkg remove --autoremove ffmpeg'])
 		self.keySave()
 
 	def installCallback(self, answer):
 		if answer:
-			from Screens.Console import Console
 			self.session.open(Console, cmdlist=['opkg update && opkg install ffmpeg'])
 			self.keySave()
 		else:
