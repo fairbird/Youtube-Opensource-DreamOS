@@ -104,11 +104,11 @@ class YouTubeVideoUrl():
 		return content
 
 	@staticmethod
- 	def _extract_n_function_name(jscode):
+	def _extract_n_function_name(jscode):
 		func_name, idx = search(
- 			r'''(?x)
+			r'''(?x)
 				(?:\((?:[\w$()\s]+,)*?\s*(?P<b>[a-z])\s*=\s*(?:
- 					String\s*\.\s*fromCharCode\s*\(\s*110\s*\)|
+					String\s*\.\s*fromCharCode\s*\(\s*110\s*\)|
 					"n+"\[\s*\+?s*[\w$.]+\s*]|
 					(?P<b1>(?:[\w$]+\s*\.\s*)+n\b(?:(?!&&).)+\))
 				)\s*
