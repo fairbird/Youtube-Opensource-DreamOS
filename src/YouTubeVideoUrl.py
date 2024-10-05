@@ -371,16 +371,16 @@ class YouTubeVideoUrl():
 			}
 			headers['X-YouTube-Client-Version'] = '2.0'
 		else:
-			VERSION = '1.9'
-			USER_AGENT = 'com.google.android.youtube/%s (Linux; U; Android 12; US) gzip' % VERSION
+			VERSION = '19.39.37'
+			USER_AGENT = 'com.google.android.youtube/%s (Linux; U; Android 11; US) gzip' % VERSION
 			data['context'] = {
 				'client': {
 					'hl': config.plugins.YouTube.searchLanguage.value,
 					'clientVersion': VERSION,
-					'androidSdkVersion': 31,
+					'androidSdkVersion': 30,
 					'clientName': 'ANDROID',
 					'osName': 'Android',
-					'osVersion': '12',
+					'osVersion': '11',
 					'userAgent': USER_AGENT
 				}
 			}
@@ -473,7 +473,7 @@ class YouTubeVideoUrl():
 						url = fmt.get('url')
 						if url:
 							break
-			if not url and streaming_formats:  # pragma: no cover
+			if not url:  # pragma: no cover
 				url = streaming_formats[0].get('url', '')
 
 		if not url:
