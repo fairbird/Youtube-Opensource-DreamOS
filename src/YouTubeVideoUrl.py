@@ -378,13 +378,13 @@ class YouTubeVideoUrl():
 					'hl': config.plugins.YouTube.searchLanguage.value,
 					'clientVersion': VERSION,
 					'androidSdkVersion': 31,
-					'clientName': 'ANDROID_TESTSUITE',
+					'clientName': 'ANDROID',
 					'osName': 'Android',
 					'osVersion': '12',
 					'userAgent': USER_AGENT
 				}
 			}
-			data['params'] = '2AMB'
+			data['params'] = 'Q0FFU0FnZ0M'
 			headers['X-YouTube-Client-Version'] = VERSION
 			headers['User-Agent'] = USER_AGENT
 		try:
