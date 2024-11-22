@@ -3,7 +3,7 @@
 # SCRIPT : DOWNLOAD AND INSTALL YouTube
 # ###########################################
 #
-# Command: wget https://raw.githubusercontent.com/fairbird/Youtube-Opensource-DreamOS/master/installer.sh -qO - | /bin/sh
+# Command: wget https://raw.githubusercontent.com/fairbird/Youtube-Opensource-DreamOS/master/installer.sh -O - | /bin/sh
 #
 # ###########################################
 
