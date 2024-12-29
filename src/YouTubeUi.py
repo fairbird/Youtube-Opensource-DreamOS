@@ -44,6 +44,9 @@ except ImportError:
 	# Workaround if CountryCodes not exist (BH, VTI)
 	ISO3166 = [(x[1][0], x[1][2]) for x in language.getLanguageList() if x[1][2] != 'EN']
 
+def DreamOS():
+	if os.path.exists('/var/lib/dpkg/status'):
+		return DreamOS
 
 def default_language():
 	lang = language.getLanguage().split('_')
@@ -96,8 +99,18 @@ config.plugins.YouTube.login = ConfigYesNo(default=False)
 config.plugins.YouTube.downloadDir = ConfigDirectory(default=resolveFilename(SCOPE_HDD))
 config.plugins.YouTube.useDashMP4 = ConfigYesNo(default=True)
 config.plugins.YouTube.mergeFiles = ConfigYesNo(default=False)
-config.plugins.YouTube.player = ConfigSelection(default='4097', choices=[
-	('4097', _('Default')), ('5002', _('Exteplayer')), ('5001', _('Gstplayer'))])
+
+if DreamOS():
+    config.plugins.YouTube.player = ConfigSelection(default='4097', choices=[
+        ('4097', _('Default (4097)')),
+        ('8193', _('DreamOS GstPlayer (8193)'))
+    ])
+else:
+    config.plugins.YouTube.player = ConfigSelection(default='4097', choices=[
+        ('4097', _('Default')),
+        ('5002', _('ExtePlayer')),
+        ('5001', _('GstPlayer'))
+    ])
 
 # Dublicate entry list in createSearchList
 config.plugins.YouTube.searchHistoryDict = ConfigSubDict()
@@ -1547,6 +1560,10 @@ class YouTubeSetup(ConfigListScreen, Screen):
 		self.list.append((_('Choose VirtualKeyBoard Style:'),
 			config.plugins.YouTube.VirtualKeyBoard,
 			_('You can choose what style of VirtualKeyBoard to use it.\nYouTube OR Image (VirtualKeyBoard).')))
+		# Adding player options based on image type (DreamOS check)
+		if DreamOS():  # Check for DreamOS image
+			self.list.append((_('Media Player:'), config.plugins.YouTube.player,
+				_('Specify the player which will be used for YouTube media playback.'))) 
 		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_MENU):
 			if 'ServiceApp' in p.path:
 				self.list.append((_('Media player:'),
