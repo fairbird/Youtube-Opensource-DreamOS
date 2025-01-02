@@ -426,7 +426,7 @@ class YouTubeMain(Screen):
 		self.onLayoutFinish.append(self.layoutFinish)
 		self.onClose.append(self.cleanVariables)
 		if config.plugins.YouTube.player.value == '8193':
-			break
+			return
 		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_MENU):
 			if 'ServiceApp' in p.path:
 				break
