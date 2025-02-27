@@ -97,6 +97,42 @@ else
     apt remove enigma2-plugin-extensions-youtube -y
 fi
 #########################
+# Final check depends packges if installed
+if ! grep -qs "Package: $Packagesrequests" cat $STATUS ; then
+	installed='NoPackagesrequests'
+fi
+if ! grep -qs "Package: $Packagegettext" cat $STATUS ; then
+	installed='NoPackagegettext'
+fi
+if ! grep -qs "Package: $Packagecore" cat $STATUS ; then
+	installed='NoPackagecore'
+fi
+if ! grep -qs "Package: $Packagejson" cat $STATUS ; then
+	installed='NoPackagejson'
+fi
+if ! grep -qs "Package: $Packagenetclient" cat $STATUS ; then
+	installed='NoPackagenetclient'
+fi
+if ! grep -qs "Package: $Packagepyopenssl" cat $STATUS ; then
+	installed='NoPackagepyopenssl'
+fi
+if ! grep -qs "Package: $Packagetwistedweb" cat $STATUS ; then
+	installed='NoPackagetwistedweb'
+fi
+if ! grep -qs "Package: $Packageemail" cat $STATUS ; then
+	installed='NoPackageemail'
+fi
+if ! grep -qs "Package: $Packagethreading" cat $STATUS ; then
+	installed='NoPackagethreading'
+fi
+if ! grep -qs "Package: $Packagedatetime" cat $STATUS ; then
+	installed='NoPackagedatetime'
+fi
+#if [ "$installed" = "NoPackagesrequests" -o "$installed" = "NoPackagegettext" -o "$installed" = "NoPackagecore" -o "$installed" = "NoPackagejson" -o "$installed" = "NoPackagenetclient" -o "$installed" = "NoPackagepyopenssl" -o "$installed" = "NoPackagetwistedweb" -o "$installed" = "NoPackageemail" -o "$installed" = "NoPackagethreading" -o "$installed" = "NoPackagedatetime" ]; then
+#	rm -r $PLUGINDIR/YouTube > /dev/null 2>&1
+#	exit 1
+#fi
+#########################
 cd $TMPDIR
 set -e
 echo "Downloading And Insallling YouTube plugin Please Wait ......"
