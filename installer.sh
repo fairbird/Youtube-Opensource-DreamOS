@@ -54,34 +54,40 @@ if [ -f /usr/bin/python3 ] ; then
     sleep 1
     Packagegettext=gettext
     Packagesrequests=python3-requests
-    Packagescodecs=python3-codecs
     Packagecore=python3-core
     Packagejson=python3-json
     Packagenetclient=python3-netclient
     Packagepyopenssl=python3-pyopenssl
     Packagetwistedweb=python3-twisted-web
+    Packageemail=python3-email
+    Packagethreading=python3-threading
+    Packagedatetime=python3-datetime
 else
     echo ":You have Python2 image ..."
     sleep 1
     Packagegettext=gettext
     Packagesrequests=python-requests
-    Packagescodecs=python-codecs
     Packagecore=python-core
     Packagejson=python-json
     Packagenetclient=python-netclient
     Packagepyopenssl=python-pyopenssl
     Packagetwistedweb=python-twisted-web
+    Packageemail=python-email
+    Packagethreading=python-threading
+    Packagedatetime=python-datetime
 fi
 
 # check depends packges if installed
 install $Packagesrequests
 install $Packagegettext
-install $Packagescodecs
 install $Packagecore
 install $Packagejson
 install $Packagenetclient
 install $Packagepyopenssl
 install $Packagetwistedweb
+install $Packageemail
+install $Packagethreading
+install $Packagedatetime
 
 #########################
 # Remove old version
