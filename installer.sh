@@ -53,38 +53,29 @@ if [ -f /usr/bin/python3 ] ; then
     echo ":You have Python3 image ..."
     sleep 1
     Packagegettext=gettext
-    Packagesrequests=python3-requests
     Packagecore=python3-core
     Packagejson=python3-json
     Packagenetclient=python3-netclient
-    Packagepyopenssl=python3-pyopenssl
-    Packagetwistedweb=python3-twisted-web
     Packageemail=python3-email
     Packagethreading=python3-threading
-    Packagedatetime=python3-datetime
+    Packagedatetime=python3-datetime    
 else
     echo ":You have Python2 image ..."
     sleep 1
     Packagegettext=gettext
-    Packagesrequests=python-requests
     Packagecore=python-core
     Packagejson=python-json
     Packagenetclient=python-netclient
-    Packagepyopenssl=python-pyopenssl
-    Packagetwistedweb=python-twisted-web
     Packageemail=python-email
     Packagethreading=python-threading
     Packagedatetime=python-datetime
 fi
 
 # check depends packges if installed
-install $Packagesrequests
 install $Packagegettext
 install $Packagecore
 install $Packagejson
 install $Packagenetclient
-install $Packagepyopenssl
-install $Packagetwistedweb
 install $Packageemail
 install $Packagethreading
 install $Packagedatetime
@@ -98,9 +89,6 @@ else
 fi
 #########################
 # Final check depends packges if installed
-if ! grep -qs "Package: $Packagesrequests" cat $STATUS ; then
-	installed='NoPackagesrequests'
-fi
 if ! grep -qs "Package: $Packagegettext" cat $STATUS ; then
 	installed='NoPackagegettext'
 fi
@@ -113,12 +101,6 @@ fi
 if ! grep -qs "Package: $Packagenetclient" cat $STATUS ; then
 	installed='NoPackagenetclient'
 fi
-if ! grep -qs "Package: $Packagepyopenssl" cat $STATUS ; then
-	installed='NoPackagepyopenssl'
-fi
-if ! grep -qs "Package: $Packagetwistedweb" cat $STATUS ; then
-	installed='NoPackagetwistedweb'
-fi
 if ! grep -qs "Package: $Packageemail" cat $STATUS ; then
 	installed='NoPackageemail'
 fi
@@ -128,7 +110,7 @@ fi
 if ! grep -qs "Package: $Packagedatetime" cat $STATUS ; then
 	installed='NoPackagedatetime'
 fi
-#if [ "$installed" = "NoPackagesrequests" -o "$installed" = "NoPackagegettext" -o "$installed" = "NoPackagecore" -o "$installed" = "NoPackagejson" -o "$installed" = "NoPackagenetclient" -o "$installed" = "NoPackagepyopenssl" -o "$installed" = "NoPackagetwistedweb" -o "$installed" = "NoPackageemail" -o "$installed" = "NoPackagethreading" -o "$installed" = "NoPackagedatetime" ]; then
+#if [ "$installed" = "NoPackagegettext" -o "$installed" = "NoPackagecore" -o "$installed" = "NoPackagejson" -o "$installed" = "NoPackagenetclient" -o "$installed" = "NoPackageemail" -o "$installed" = "NoPackagethreading" -o "$installed" = "NoPackagedatetime" ]; then
 #	rm -r $PLUGINDIR/YouTube > /dev/null 2>&1
 #	exit 1
 #fi
