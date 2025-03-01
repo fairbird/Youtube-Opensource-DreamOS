@@ -55,9 +55,8 @@ if [ -f /usr/bin/python3 ] ; then
     Packagegettext=gettext
     Packagecore=python3-core
     Packagejson=python3-json
-    Packagenetclient=python3-netclient
+    Packageio=python3-io
     Packageemail=python3-email
-    Packagethreading=python3-threading
     Packagedatetime=python3-datetime    
 else
     echo ":You have Python2 image ..."
@@ -65,9 +64,8 @@ else
     Packagegettext=gettext
     Packagecore=python-core
     Packagejson=python-json
-    Packagenetclient=python-netclient
+    Packageio=python-io
     Packageemail=python-email
-    Packagethreading=python-threading
     Packagedatetime=python-datetime
 fi
 
@@ -75,9 +73,8 @@ fi
 install $Packagegettext
 install $Packagecore
 install $Packagejson
-install $Packagenetclient
+install $Packageio
 install $Packageemail
-install $Packagethreading
 install $Packagedatetime
 
 #########################
@@ -98,19 +95,16 @@ fi
 if ! grep -qs "Package: $Packagejson" cat $STATUS ; then
 	installed='NoPackagejson'
 fi
-if ! grep -qs "Package: $Packagenetclient" cat $STATUS ; then
-	installed='NoPackagenetclient'
+if ! grep -qs "Package: $Packageio" cat $STATUS ; then
+	installed='NoPackageio'
 fi
 if ! grep -qs "Package: $Packageemail" cat $STATUS ; then
 	installed='NoPackageemail'
 fi
-if ! grep -qs "Package: $Packagethreading" cat $STATUS ; then
-	installed='NoPackagethreading'
-fi
 if ! grep -qs "Package: $Packagedatetime" cat $STATUS ; then
 	installed='NoPackagedatetime'
 fi
-#if [ "$installed" = "NoPackagegettext" -o "$installed" = "NoPackagecore" -o "$installed" = "NoPackagejson" -o "$installed" = "NoPackagenetclient" -o "$installed" = "NoPackageemail" -o "$installed" = "NoPackagethreading" -o "$installed" = "NoPackagedatetime" ]; then
+#if [ "$installed" = "NoPackagegettext" -o "$installed" = "NoPackagecore" -o "$installed" = "NoPackagejson" -o "$installed" = "NoPackageio" -o "$installed" = "NoPackageemail" -o "$installed" = "NoPackagedatetime" ]; then
 #	rm -r $PLUGINDIR/YouTube > /dev/null 2>&1
 #	exit 1
 #fi
