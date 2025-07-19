@@ -57,7 +57,8 @@ if [ -f /usr/bin/python3 ] ; then
     Packagejson=python3-json
     Packageio=python3-io
     Packageemail=python3-email
-    Packagedatetime=python3-datetime    
+    Packagedatetime=python3-datetime
+    Packagerequests=python3-requests
 else
     echo ":You have Python2 image ..."
     sleep 1
@@ -67,6 +68,7 @@ else
     Packageio=python-io
     Packageemail=python-email
     Packagedatetime=python-datetime
+    Packagerequests=python-requests
 fi
 
 # check depends packges if installed
@@ -76,6 +78,7 @@ install $Packagejson
 install $Packageio
 install $Packageemail
 install $Packagedatetime
+install $Packagerequests
 
 #########################
 # Remove old version
@@ -103,6 +106,9 @@ if ! grep -qs "Package: $Packageemail" cat $STATUS ; then
 fi
 if ! grep -qs "Package: $Packagedatetime" cat $STATUS ; then
 	installed='NoPackagedatetime'
+fi
+if ! grep -qs "Package: $Packagerequests" cat $STATUS ; then
+	installed='Packagerequests'
 fi
 #if [ "$installed" = "NoPackagegettext" -o "$installed" = "NoPackagecore" -o "$installed" = "NoPackagejson" -o "$installed" = "NoPackageio" -o "$installed" = "NoPackageemail" -o "$installed" = "NoPackagedatetime" ]; then
 #	rm -r $PLUGINDIR/YouTube > /dev/null 2>&1
