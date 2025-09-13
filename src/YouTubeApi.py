@@ -102,7 +102,9 @@ class YouTubeApi:
 	def search_list_full(self, safe_search, order, part, q, s_type,
 			max_results, page_token, **kwargs):
 
-		q = compat_quote(q)
+		q = compat_quote(q) if q else None
+		if not q:
+			q = '*'  # fallback so feeds work
 
 		url = 'search?{}safeSearch={}{}{}{}&order={}&part={}&q={}&type={}{}{}'.format(
 				kwargs.get('video_embeddable', '') and 'videoEmbeddable=%s&' % kwargs['video_embeddable'],
@@ -113,6 +115,7 @@ class YouTubeApi:
 				order, part.replace(',', '%2C'), q, s_type,
 				kwargs.get('relevance_language', '') and '&relevanceLanguage=%s' % kwargs['relevance_language'],
 				kwargs.get('region_code', '') and '&regionCode=%s' % kwargs['region_code'])
+
 		return self.get_response(url, max_results, page_token)
 
 	def search_list(self, order, part, channel_id, max_results, page_token):
