@@ -413,12 +413,12 @@ class YouTubeVideoUrl():
 			headers['Authorization'] = yt_auth
 		if client == 3:
 			VERSION = '19.44.38'
-			USER_AGENT = 'com.google.android.youtube/%s (Linux; U; Android 11) gzip' % VERSION
+			USER_AGENT = 'Mozilla/5.0 (Android 14; Mobile; rv:128.0) Gecko/128.0 Firefox/128.0'
 			CLIENT_CONTEXT = {
 				'clientName': 'ANDROID',
-				'androidSdkVersion': 30,
+				'androidSdkVersion': 34,
 				'osName': 'Android',
-				'osVersion': '11'
+				'osVersion': '14'
 			}
 			data['params'] = '2AMB'
 		elif client == 5:
